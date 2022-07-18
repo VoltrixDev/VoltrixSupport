@@ -4,8 +4,11 @@
 [![Java CI with Gradle](https://github.com/CaledonianEH/VoltrixSupport/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/CaledonianEH/VoltrixSupport/actions/workflows/build.yml)
 A bare-bones utility bot that automatically responds to user questions
 
-# Instructions
+# About
 This is a discord bot powered by JDA, but primarily written in Kotlin. I haven't tried running this on Railway, but it's unlikely that it'll work. 
+
+# Images
+![ePd41qE](https://user-images.githubusercontent.com/62163840/179443665-a037de4b-afbf-416c-a321-766ca72198ef.png)
 
 ### Steps
 - Create an application in the [Discord Developer Portal](https://discord.com/developers/applications), and convert it to a bot.
