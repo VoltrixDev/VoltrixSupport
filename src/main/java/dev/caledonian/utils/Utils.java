@@ -15,10 +15,8 @@ import org.json.JSONArray;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
@@ -34,6 +32,78 @@ public class Utils {
     @SneakyThrows
     public static boolean isDeveloper(User user){
         return developers().contains(user.getId());
+    }
+
+    public static String removePunctuation(String inputString) {
+        String[] punctuation = new String[] { ".", ",", "!", "?", ";", ":", "\"", "'", "`", "~", "`", "^", "&", "*", "(", ")", "[", "]", "{", "}", "\\", "/", "|", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-" };
+        for(String punctuationChar : punctuation) {
+            inputString = inputString.replace(punctuationChar, "");
+            inputString = inputString.replace("I", "");
+            inputString = inputString.replace("you", "");
+        }
+        return inputString;
+    }
+
+    public static boolean containsWords(String inputString, String[] words) {
+        if(isDisqualifyingStarter(removePunctuation(inputString))) return false;
+        for(String word : words) {
+            for(String split : removePunctuation(inputString).split(" ")) {
+                if(split.toLowerCase().contains(word)) return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean containsWordsIfQuestion(String inputString, String[] words) {
+        if(isQuestion(removePunctuation(inputString))){
+            return containsWords(removePunctuation(inputString), words);
+        }
+        return false;
+    }
+
+    public static boolean containsPhrases(String inputString, String[] phrases) {
+        if(isDisqualifyingStarter(inputString)) return false;
+        String[] splitInput = removePunctuation(inputString).split(" ");
+        for(String phrase : phrases) {
+            String[] phraseKeywords = phrase.split(" ");
+            int n = 0;
+            for(String word : splitInput) {
+                for(String keyword : phraseKeywords) {
+                    if(word.equalsIgnoreCase(keyword)) {
+                        n = n + 1;
+                        System.out.println("word is " + word + "and keyword is " + keyword);
+                    }
+                }
+                System.out.println("phrase keyword is " + phraseKeywords.length);
+                System.out.println("n is " + n);
+            }
+            if(n == phraseKeywords.length) return true;
+            n = 1;
+        }
+        return false;
+    }
+
+    public static boolean isQuestion(String inputString) {
+        String[] words = {"what", "how", "where", "wonder", "wondering"};
+        for(String word : words) {
+            if(removePunctuation(inputString).toLowerCase().startsWith(word)) {
+                return true;
+            }
+            if(removePunctuation(inputString).toLowerCase().endsWith(word)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isDisqualifyingStarter(String inputString) {
+        String[] words = {"was", "were", "just", "you", "read"};
+        for(String word : words) {
+            for(String x : removePunctuation(inputString).split(" ")) {
+                if(Objects.equals(x, word)) return true;
+            }
+        }
+        return false;
     }
 
     @SneakyThrows

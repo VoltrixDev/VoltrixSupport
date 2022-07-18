@@ -62,6 +62,7 @@ public class VoltrixSupportBot {
 
         embeds = new PremadeEmbeds(this, jda);
         registerEvents();
+        Utils.sendConsoleLog("Finished loading bot in %sms", System.currentTimeMillis() - startTime);
     }
 
     public void registerEvents() {
