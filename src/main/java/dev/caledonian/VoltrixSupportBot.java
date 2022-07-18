@@ -1,6 +1,6 @@
 package dev.caledonian;
 
-import dev.caledonian.events.MessageListener;
+import dev.caledonian.listener.MessageListener;
 import dev.caledonian.utils.PremadeEmbeds;
 import dev.caledonian.utils.Utils;
 import lombok.Getter;

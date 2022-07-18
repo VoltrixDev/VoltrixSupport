@@ -1,4 +1,4 @@
-package dev.caledonian.events
+package dev.caledonian.listener
 
 import dev.caledonian.VoltrixSupportBot
 import dev.caledonian.utils.MessageUtils
