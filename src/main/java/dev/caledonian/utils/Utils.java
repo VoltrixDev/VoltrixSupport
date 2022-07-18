@@ -29,35 +29,6 @@ public class Utils {
         this.jda = jda;
     }
 
-    @SneakyThrows
-    public static boolean isDeveloper(User user){
-        return developers().contains(user.getId());
-    }
-
-    @SneakyThrows
-    public static List<String> developers(){
-        ArrayList<String> listdata = new ArrayList<>();
-        JSONArray jsonArray = main.getConfig().getJSONObject("development").getJSONArray("developers");
-        if(jsonArray != null){
-            for (int i=0;i<jsonArray.length();i++){
-                listdata.add(jsonArray.getString(i));
-            }
-        }
-
-        return listdata;
-    }
-
-    public static void deleteAfter(Message message, int delay){
-        message.delete().queueAfter(delay, TimeUnit.SECONDS);
-    }
-
-    public static String getLogTime(){
-        String timeStamp;
-        timeStamp = new SimpleDateFormat("M/d/yy hh:mm:ss:SSSS z").format(new Date());
-
-        return String.format("[%s] ", timeStamp);
-    }
-
     public static Color fromHex(String colorStr) {
         String finalColorString = colorStr;
         return new Color(
@@ -66,22 +37,13 @@ public class Utils {
                 Integer.valueOf( finalColorString.substring( 5, 7 ), 16 ) );
     }
 
-    public static UUID convertToLongUUID(String shortUUID){
-        StringBuffer sb = new StringBuffer(shortUUID);
-        sb.insert(8, "-");
 
-        sb = new StringBuffer(sb.toString());
-        sb.insert(13, "-");
+    public static String getLogTime(){
+        String timeStamp;
+        timeStamp = new SimpleDateFormat("M/d/yy hh:mm:ss:SSSS z").format(new Date());
 
-        sb = new StringBuffer(sb.toString());
-        sb.insert(18, "-");
-
-        sb = new StringBuffer(sb.toString());
-        sb.insert(23, "-");
-
-        return UUID.fromString(sb.toString());
+        return String.format("[%s] ", timeStamp);
     }
-
     public static void sendConsoleLog(String message, Object... components){
         System.out.printf("%s %s%n", getLogTime(), String.format(message, components));
     }
