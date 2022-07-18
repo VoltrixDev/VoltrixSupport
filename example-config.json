@@ -1,0 +1,13 @@
+{
+  "token": "",
+
+  "activity": {
+    "enabled": false,
+    "status": "IDLE",
+    "activity": "Voltrix"
+  },
+
+  "auto-support": {
+    "channel-id": 0
+  }
+}
